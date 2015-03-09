@@ -37,54 +37,52 @@ module.exports = function (grunt) {
       }
     },
 
-    concat: {
-      generated: {
-        files: [
-          {
-            src: [
-              'css/style.css',
-              'plugins/flexslider.css'
-            ],
-            dest: '<%= config.tmp %>/css/style.css'
-          },
-          {
-            src: [
-              'js/jquery-1.8.2.min.js',
-              'js/bootstrap.min.js'
-            ],
-            dest: '<%= config.dest %>/js/app.js'
-          }
-        ]
-      }
-    },
+    //concat: {
+    //  generated: {
+    //    files: [
+    //      {
+    //        src: [
+    //          'css/style.css',
+    //          'plugins/flexslider.css'
+    //        ],
+    //        dest: '<%= config.tmp %>/concat/css/style.css'
+    //      },
+    //      {
+    //        src: [
+    //          'js/jquery-1.8.2.min.js',
+    //          'js/bootstrap.min.js'
+    //        ],
+    //        dest: '<%= config.dest %>/concat/js/app.js'
+    //      }
+    //    ]
+    //  }
+    //},
 
-    cssmin: {
-      generated: {
-        files: [
-          {
-            src: '<%= config.tmp %>/css/style.css',
-            dest: '<%= config.dest %>/css/style.css'
-
-          }
-        ]
-      }
-    },
+    //cssmin: {
+    //  generated: {
+    //    files: [
+    //      {
+    //        src: '<%= config.tmp %>/css/style.css',
+    //        dest: '<%= config.dest %>/css/style.css'
+    //
+    //      }
+    //    ]
+    //  }
+    //},
 
     useminPrepare: {
       html: 'html/index.html',
       options: {
         root: '.',
-        dest: '<%= config.dist %>'
+        dest: '<%= config.dest %>'
       }
     },
 
     usemin: {
       options: {
-        assetsDirs: [
-          '<%= config.dest %>'
-        ]
+        assetsDirs: '<%= config.dest %>'
       },
-      html: '<%= config.dest %>/html/**/*.html'
+      html: '<%= config.dest %>/**/*.html'
     }
 
   });
@@ -106,19 +104,3 @@ module.exports = function (grunt) {
     'cssmin'
   ])
 }
-
-///.
-//├─html
-//│  └─*.html
-//├─css
-//│  └─*.css
-//├─img
-//│  └─*.{jpg,png}
-//│
-//├─dist
-//│  └─html
-//│  │  └─*.html
-//│  └─css
-//│  │  └─*.min.css
-//│  └─img
-//└───  └─*.{jpg,png}
