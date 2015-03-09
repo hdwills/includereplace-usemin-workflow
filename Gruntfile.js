@@ -45,19 +45,19 @@ module.exports = function (grunt) {
     //          'css/style.css',
     //          'plugins/flexslider.css'
     //        ],
-    //        dest: '<%= config.tmp %>/concat/css/style.css'
+    //        dest: '<%= config.tmp %>/css/style.css'
     //      },
     //      {
     //        src: [
     //          'js/jquery-1.8.2.min.js',
     //          'js/bootstrap.min.js'
     //        ],
-    //        dest: '<%= config.dest %>/concat/js/app.js'
+    //        dest: '<%= config.dest %>/js/app.js'
     //      }
     //    ]
     //  }
     //},
-
+    //
     //cssmin: {
     //  generated: {
     //    files: [
@@ -80,7 +80,9 @@ module.exports = function (grunt) {
 
     usemin: {
       options: {
-        assetsDirs: '<%= config.dest %>'
+        assetsDirs: [
+          '<%= config.dest %>'
+        ]
       },
       html: '<%= config.dest %>/**/*.html'
     }
@@ -104,3 +106,19 @@ module.exports = function (grunt) {
     'cssmin'
   ])
 }
+
+///.
+//├─html
+//│  └─*.html
+//├─css
+//│  └─*.css
+//├─img
+//│  └─*.{jpg,png}
+//│
+//├─dist
+//│  └─html
+//│  │  └─*.html
+//│  └─css
+//│  │  └─*.min.css
+//│  └─img
+//└───  └─*.{jpg,png}
