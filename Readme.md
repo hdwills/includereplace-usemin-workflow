@@ -89,12 +89,7 @@ THX :-)
 直接在模板文件中引入最终打包好的资源，然后由 `usemin`，`filerev` 来做处理。初步见成效：
 + dist/css `style.978014a0.css`
 + dist/js `bootstrap.d41d8cd9.js`
-+ dist/pages/index.html
-    ```html
-    <link href="../css/style.978014a0.css" rel="stylesheet">
-    <script src="../js/bootstrap.d41d8cd9.js"></script>
-    ```
-
++ dist/pages/index.html `<link href="../css/style.978014a0.css" rel="stylesheet">`，`<script src="../js/bootstrap.d41d8cd9.js"></script>`
 
 ## Change Log
  * 2016-05-12 修改打包方式
