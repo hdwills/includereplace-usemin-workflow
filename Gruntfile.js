@@ -19,61 +19,80 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            cwd: 'include',
+            cwd: '<%= config.src %>/pages/',
             src: '*.html',
-            dest: 'html'
+            dest: '<%= config.dest %>/pages/'
           }
         ]
+      }
+    },
+
+    sass: {
+      dist: {
+        options: {
+          style: 'expanded'
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= config.src %>/sass/',
+          src: ['style.scss'],
+          dest: '<%= config.src %>/css/',
+          ext: '.css'
+        }]
       }
     },
 
     copy: {
       dist: {
         expand: true,
+        cwd: '<%= config.src %>/',
         src: [
-          'html/**/*.html'
+          'js/jquery-1.9.1.min.js'
         ],
-        dest: '<%= config.dest %>'
+        dest: '<%= config.dest %>/'
       }
     },
 
-    //concat: {
-    //  generated: {
-    //    files: [
-    //      {
-    //        src: [
-    //          'css/style.css',
-    //          'plugins/flexslider.css'
-    //        ],
-    //        dest: '<%= config.tmp %>/css/style.css'
-    //      },
-    //      {
-    //        src: [
-    //          'js/jquery-1.8.2.min.js',
-    //          'js/bootstrap.min.js'
-    //        ],
-    //        dest: '<%= config.dest %>/js/app.js'
-    //      }
-    //    ]
-    //  }
-    //},
-    //
-    //cssmin: {
-    //  generated: {
-    //    files: [
-    //      {
-    //        src: '<%= config.tmp %>/css/style.css',
-    //        dest: '<%= config.dest %>/css/style.css'
-    //
-    //      }
-    //    ]
-    //  }
-    //},
+    filerev: {
+      css: {
+        src: '<%= config.dest %>/css/style.css'
+      },
+      js: {
+        src: [
+          '<%= config.dest %>/js/**/{,*/}*.js',
+          '!<%= config.dest %>/js/jquery-1.9.1.min.js'
+        ]
+      }
+    },
+
+    concat: {
+      js: {
+        src: [
+          '<%= config.src %>js/bootstrap/collapse.js',
+          '<%= config.src %>js/bootstrap/dropbox.js',
+          '<%= config.src %>js/bootstrap/modal.js',
+          '<%= config.src %>js/bootstrap/tab.js'
+        ],
+        dest: '<%= config.dest %>/js/bootstrap.js'
+      }
+    },
+
+    cssmin: {
+      generated: {
+        files: [
+          {
+            src: '<%= config.src %>/css/style.css',
+            dest: '<%= config.dest %>/css/style.css'
+
+          }
+        ]
+      }
+    },
 
     useminPrepare: {
       html: 'html/index.html',
       options: {
-        root: '.',
+        root: '<%= config.dest %>',
         dest: '<%= config.dest %>'
       }
     },
@@ -81,10 +100,12 @@ module.exports = function (grunt) {
     usemin: {
       options: {
         assetsDirs: [
-          '<%= config.dest %>'
+          '<%= config.dest %>/',
+          '<%= config.dest %>/css/'
         ]
       },
-      html: '<%= config.dest %>/**/*.html'
+      css: '<%= config.dest %>/css/style*.css',
+      html: '<%= config.dest %>/pages/*.html'
     }
 
   });
@@ -98,12 +119,12 @@ module.exports = function (grunt) {
   // RegisterTask
   grunt.registerTask('default', [
     'clean:release',
-    'useminPrepare',
-    'includereplace',
     'copy',
+    'includereplace',
     'concat',
-    'usemin',
-    'cssmin'
+    'cssmin',
+    'filerev',
+    'usemin'
   ])
 }
 
