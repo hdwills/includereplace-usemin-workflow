@@ -90,6 +90,7 @@ THX :-)
 + dist/css `style.978014a0.css`
 + dist/js `bootstrap.d41d8cd9.js`
 + dist/pages/index.html
+
     ```html
     <link href="../css/style.978014a0.css" rel="stylesheet">
     <script src="../js/bootstrap.d41d8cd9.js"></script>
