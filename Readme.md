@@ -2,7 +2,9 @@
 
 随着 Grunt 在项目中的不断使用，Workflow 也不断地在改善。
 
-## 未加入 usemin
+## 2015-03-09 初建工作流
+
+### 未加入 usemin
 
 以前我的大致流程是，从 include 里先逐步拆分出来 `head`，`footer` 等公共部分，然后再按需加入相应的页面中来充当模板。
 
@@ -12,7 +14,7 @@
 * 拷贝到 dist 目录（copy）
 * 合并、压缩等（cssmin，imagemin）
 
-## 分析
+### 分析
 
 之前在 `head` 部分，最初加入的就是最终的打包的 `<link href="../css/style.css" rel="stylesheet">` 样式文件，打包这步按照个人习惯方式就不说了。后来接触了 Yeoman 之后，看到有他们团队做的 `grunt-usemin`，其中在 html 页面中加入的 block 部分转换为单独的一行，其实和我刚才提到的最终结果是一致的。
 
@@ -36,7 +38,7 @@ usemin 大致的任务就是：
 * useminPrepare 给指定文件中的 block 转化为输出版本做好配置，其实质还是由 concat、uglify 等相应的插件处理。
 * usemin 就是替换 block 块，revisioned 版本。
 
-## 现在
+### 现在
 
 所以现在的工作流程：
 * 编辑模板文件**（没有优化的 script、stylesheets）**
@@ -44,7 +46,7 @@ usemin 大致的任务就是：
 * 拷贝到 dist 目录（copy）
 * 优化、合并、压缩等（cssmin，imagemin，**usemin**）
 
-## 疑问
+### 疑问
 
 说了这么多下面才开始重点了。最初测试时随手搭的项目，完全没有任何问题的。记忆中的目录结构也是这样。
 
@@ -69,7 +71,7 @@ usemin 大致的任务就是：
 │  └─img
 └───  └─*.{jpg,png}
 ```
-## 问题
+### 问题
 
 就在最终 `build` 之后，html 文件里的 block 并没有被替换掉 :-(
 
@@ -80,3 +82,20 @@ usemin 大致的任务就是：
 先放到这里，不知道有没有人遇到相应的问题。若不能解决，就在流程上做改动，毕竟这只是个人的尝试，不一定就是科学的方法。
 
 THX :-)
+
+## 2016-05-12 修改打包方式
+最近项目步入正轨，迭代更新也比较快速。即使我们选择加班半夜更新项目，但是还是经常会较集中的出现前端报错。静态资源文件版本更新是“覆盖式”的，由于期初没有考虑到缓存等问题，为了尽快解决此问题。以前构建的工作流后来改进之后，也没在继续更新，现在又翻出来继续研究下版本更新与缓存。
+
+直接在模板文件中引入最终打包好的资源，然后由 `usemin`，`filerev` 来做处理。初步见成效：
++ dist/css `style.978014a0.css`
++ dist/js `bootstrap.d41d8cd9.js`
++ dist/pages/index.html
+    ```html
+    <link href="../css/style.978014a0.css" rel="stylesheet">
+    <script src="../js/bootstrap.d41d8cd9.js"></script>
+    ```
+
+
+## Change Log
+ * 2016-05-12 修改打包方式
+ * 2015-03-09 初建工作流
